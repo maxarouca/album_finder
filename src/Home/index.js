@@ -3,7 +3,9 @@ import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 
 import Card from 'components/Card';
-import { Container, Artist, AlbumContainer } from './styles';
+import { Container, SearchContainer, Artist, AlbumContainer } from './styles';
+
+import { FaSearch } from 'react-icons/fa';
 
 const GET_ALBUNS = gql`
   {
@@ -33,9 +35,10 @@ function Home() {
   return (
     <Container>
       <h1>Album Finder</h1>
-      <div>
+      <SearchContainer>
+        <FaSearch />
         <input type="text" name="search" id="search" />
-      </div>
+      </SearchContainer>
       <Artist>
         <img src={artist.image} alt={artist.name} />
         <h2>{artist.name}</h2>
