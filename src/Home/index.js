@@ -37,7 +37,7 @@ function Home() {
       <h1>Album Finder</h1>
       <SearchContainer>
         <FaSearch />
-        <input type="text" name="search" id="search" />
+        <input type="text" name="search" id="search" placeholder="Search" />
       </SearchContainer>
       <Artist>
         <img src={artist.image} alt={artist.name} />
