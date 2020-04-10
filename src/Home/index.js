@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 
@@ -23,21 +23,43 @@ const GET_ALBUNS = gql`
 `;
 
 function Home() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchAlbums, setSearchAlbums] = React.useState([]);
   const { loading, error, data } = useQuery(GET_ALBUNS);
+
+  const artist = data && data.queryArtists[0];
+
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  useEffect(() => {
+    const results =
+      artist &&
+      artist.albums.filter((album) =>
+        album.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    if (results) {
+      setSearchAlbums(results);
+    }
+  }, [searchTerm, artist]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
-
-  console.log(data);
-
-  const artist = data.queryArtists[0];
 
   return (
     <Container>
       <h1>Album Finder</h1>
       <SearchContainer>
         <FaSearch />
-        <input type="text" name="search" id="search" placeholder="Search" />
+        <input
+          type="text"
+          name="search"
+          id="search"
+          placeholder="Search"
+          value={searchTerm}
+          onChange={handleChange}
+        />
       </SearchContainer>
       <Artist>
         <img src={artist.image} alt={artist.name} />
@@ -45,7 +67,7 @@ function Home() {
       </Artist>
 
       <AlbumContainer>
-        {artist.albums.map((album) => (
+        {searchAlbums.map((album) => (
           <Card album={album} key={album.id} />
         ))}
       </AlbumContainer>
