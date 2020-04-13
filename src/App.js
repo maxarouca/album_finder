@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
-import ApolloClient from 'apollo-boost';
 
 import GlobalStyle from './styles/global';
 import Home from 'Home';
-
-const client = new ApolloClient({
-  uri: 'https://spotify-graphql-server.herokuapp.com/graphql',
-});
+import getApolloClient from 'apollo/client';
 
 function App() {
+  const [client, setClient] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getApolloClient().then((client) => {
+      setClient(client);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <ApolloProvider client={client}>
       <GlobalStyle />
