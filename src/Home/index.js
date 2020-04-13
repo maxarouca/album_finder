@@ -28,6 +28,7 @@ function Home() {
   const { loading, error, data } = useQuery(GET_ALBUNS);
 
   const artist = data && data.queryArtists[0];
+  console.log(data);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
