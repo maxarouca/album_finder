@@ -3,6 +3,8 @@ import { ApolloProvider } from '@apollo/react-hooks';
 
 import GlobalStyle from './styles/global';
 import Home from 'Home';
+import Loading from 'components/Loading';
+
 import getApolloClient from 'apollo/client';
 
 function App() {
@@ -17,7 +19,7 @@ function App() {
   }, []);
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <Loading />;
   }
 
   return (

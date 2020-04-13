@@ -6,6 +6,7 @@ import Card from 'components/Card';
 import { Container, SearchContainer, Artist, AlbumContainer } from './styles';
 
 import { FaSearch } from 'react-icons/fa';
+import Loading from 'components/Loading';
 
 const GET_ALBUNS = gql`
   {
@@ -45,7 +46,12 @@ function Home() {
     }
   }, [searchTerm, artist]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <p>
+        <Loading />
+      </p>
+    );
   if (error) return <p>Error</p>;
 
   return (
