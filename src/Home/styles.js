@@ -5,6 +5,8 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  width: 100%;
 `;
 
 export const SearchContainer = styled.div`
@@ -14,6 +16,9 @@ export const SearchContainer = styled.div`
   align-items: center;
   position: relative;
   margin-top: 20px;
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 
   svg {
     position: absolute;
@@ -22,12 +27,16 @@ export const SearchContainer = styled.div`
 
   input {
     height: 50px;
-    width: 300px;
+    width: 500px;
     padding: 10px;
     padding-left: 40px;
     font-size: 16px;
     border: 1px solid #b6cad4;
     border-radius: 4px;
+
+    @media (max-width: 800px) {
+      width: 100%;
+    }
   }
 `;
 
@@ -46,4 +55,16 @@ export const AlbumContainer = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
   margin-top: 40px;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 800px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 520px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;

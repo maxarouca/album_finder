@@ -9,6 +9,10 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   height: 380px;
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.4);
+  @media (max-width: 520px) {
+    width: 100%;
+  }
   img {
     margin-bottom: 20px;
     width: 200px;
